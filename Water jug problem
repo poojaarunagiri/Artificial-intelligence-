@@ -1,0 +1,29 @@
+from collections import deque
+
+def water_jug_solver(jug1, jug2, target):
+    # Each state is represented as (a, b) -> amount in jug1 and jug2
+    visited = set()
+    queue = deque()
+    
+    # Start with both jugs empty
+    queue.append((0, 0))
+    visited.add((0, 0))
+
+    while queue:
+        a, b = queue.popleft()
+        print(f"Jug1: {a}, Jug2: {b}")  # Show step
+
+        # If we reach the target
+        if a == target or b == target:
+            print("\nReached the target!")
+            return True
+
+        # Possible next states
+        next_states = set()
+
+        # Fill jug1
+        next_states.add((jug1, b))
+        # Fill jug2
+        next_states.add((a, jug2))
+        # Empty jug1
+        next_states.add((0, b))
